@@ -3,14 +3,26 @@ package edu.escuelaing.arsw.proyecto.model;
 import java.util.ArrayList;
 
 public class User {
-    public User (){
-
-    }
     private String name;
+    private String correo;
     private String password;
     private Integer pGanadas = 0;
     private Integer pPerdidas = 0;
     private ArrayList<String> mejoras = new ArrayList<String>();
+    public User (){
+
+    }
+
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+
 
     public String getName() {
         return name;

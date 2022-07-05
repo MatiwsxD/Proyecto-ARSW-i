@@ -11,11 +11,11 @@ public class AutentificationLogin extends ConexionSQL{
     java.sql.Statement st;
     ResultSet rs;
 
-    public boolean getUserLogin(String iduser, String contraseña) {
+    public boolean getUserLogin(String correo, String contraseña) {
         try{
             Connection conexion = conectar();
             st = conexion.createStatement();
-            String sql = "select * from register where idusuario='" + iduser + "';";
+            String sql = "select * from register where correo='" + correo + "';";
             rs = st.executeQuery(sql);
             if (rs.next() && rs.getString("password").equals(contraseña)) {
                 return true;
@@ -37,13 +37,36 @@ public class AutentificationLogin extends ConexionSQL{
         try {
             Connection conexion = conectar();
             st = conexion.createStatement();
-            String sql = "insert into users(Usuario,Contraseña,Mejoras) values('" + user.getName() + "','" + user.getPassword() + "','" + user.getMejoras()  + "');";
+            String sql = "insert into users(Usuario,Correo,Contraseña,pGanadas,pPerdidas,Mejoras) values('" + user.getName() + "','" + user.getCorreo() + "','" + user.getPassword() + "','" +user.getpGanadas()  + "','" + user.getpPerdidas()+ "','" + user.getMejoras()  + "');";
             st.execute(sql);
             st.close();
             conexion.close();
         } catch (Exception e) {
             Logger.getLogger(AutentificationLogin.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+
+    public User getUser(String user) {
+        User userInfo = new User();
+        try{
+            Connection conexion = conectar();
+            st = conexion.createStatement();
+            String sql = "select * from register where user='" + user + "';";
+            rs = st.executeQuery(sql);
+            rs.next();
+            userInfo.setName(rs.getString("Usuario"));
+            userInfo.setpGanadas(rs.getInt("pGanadas"));
+            userInfo.setpPerdidas(rs.getInt("pPerdidas"));
+            return userInfo;
+        }
+        catch (Exception e) {
+            Logger.getLogger(AutentificationLogin.class.getName()).log(Level.SEVERE, null, e);
+            //System.out.println("no se encontro registro");
+            return userInfo;
+        }
+
+
     }
 
 
