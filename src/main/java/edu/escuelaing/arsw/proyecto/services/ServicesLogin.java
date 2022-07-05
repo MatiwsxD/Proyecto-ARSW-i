@@ -2,7 +2,9 @@ package edu.escuelaing.arsw.proyecto.services;
 
 import edu.escuelaing.arsw.proyecto.model.User;
 import edu.escuelaing.arsw.proyecto.persistence.AutentificationLogin;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServicesLogin {
     public void registrarPlayer(String usuario, String contraseña){
         User userProfile = new User();

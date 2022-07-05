@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 public class ConexionSQL {
     Connection conn=null;
-    private String url = "jdbc:postgresql://ec2-54-80-122-11.compute-1.amazonaws.com:5432/df2gcac2r9a3ai?sslmode=require";
-    private String usuario = "wytppaqzpczwfj";
-    private String clave = "28ad99361a19eba5e87ce473a3bbd4d1a718db0c2dfd591d47b5436143ffc21b";
+    private String url = "jdbc:postgresql://ec2-18-204-142-254.compute-1.amazonaws.com:5432/de02prt19oul2j?sslmode=require";
+    private String usuario = "wddxrjkhfmijtep";
+    private String clave = "31d2ce960d66bc70a7740f3146ef0f4865af4244ffcc505a2ef9bdbfacb413d2";
 
     public Connection conectar(){
         try {

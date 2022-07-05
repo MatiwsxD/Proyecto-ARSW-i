@@ -13,10 +13,10 @@ public class TicTacToeServiceController {
     @Autowired
     //servicesTicTacToes serviciosInGame;
     ServicesLogin serviciosLogin;
-
     @PutMapping("/registry")
     public ResponseEntity<?> registerPlayer(@RequestParam( value= "usuario")String usuario, @RequestParam( value= "password") String password){
         serviciosLogin.registrarPlayer(usuario,password);
+
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
