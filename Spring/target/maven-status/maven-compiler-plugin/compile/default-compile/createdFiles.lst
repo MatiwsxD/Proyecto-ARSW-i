@@ -1,0 +1,7 @@
+edu\escuelaing\arsw\proyecto\configuration\WebSocketTicTacToe.class
+edu\escuelaing\arsw\proyecto\services\ServicesLogin.class
+edu\escuelaing\arsw\proyecto\controller\TicTacToeServiceController.class
+edu\escuelaing\arsw\proyecto\persistence\AutentificationLogin.class
+edu\escuelaing\arsw\proyecto\model\User.class
+edu\escuelaing\arsw\proyecto\persistence\ConexionSQL.class
+edu\escuelaing\arsw\proyecto\App.class
