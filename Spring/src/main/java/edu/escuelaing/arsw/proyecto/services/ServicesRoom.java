@@ -1,6 +1,9 @@
 package edu.escuelaing.arsw.proyecto.services;
 
 
+import edu.escuelaing.arsw.proyecto.model.User;
+import edu.escuelaing.arsw.proyecto.persistence.AutentificationLogin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.Map;
 
 @Service
 public class ServicesRoom {
+    AutentificationLogin data = new AutentificationLogin();
     private Map<String, Integer> rooms = new HashMap<String, Integer>();
     private boolean isInit = false;
 
@@ -47,4 +51,15 @@ public class ServicesRoom {
         System.out.println(rooms.toString());
         return flag;
     }
+
+    public User getPerfil(String correo){
+        return data.getUser(correo);
+    }
+    public void addWinn(String correo){
+        data.actualizarWinner(correo);
+    }
+    public void addLoser(String correo){
+        data.actualizarLoser(correo);
+    }
+
 }

@@ -13,14 +13,32 @@ export let Registerr= function() {
         if(userName === '' ||  email ==='' || password === '' || confirmPassword === ''){
             console.log('Debe llenar todos los campos') //Modificar con una alerta
         }
-        submit()
+        
+        isRegistered();
+
+        
+    }
+
+    let isRegistered = async()=>{
+        let url = 'http://localhost:8080/tictac/checkUser/'+email
+        let data = await fetch(url,{
+            method: 'GET'
+          }).then(response => response.json());
+        if(!data){
+            submit();
+            alert("El usuario se registro correctamente")
+        }
+        else{
+            alert("El usuario ya se encuentra registrado")
+        }
+
     }
 
     let submit= async()=>{
 
         let url = 'http://localhost:8080/tictac/registry/'+userName+'/'+email+'/'+password;
         
-        let data = await fetch(url,{
+        await fetch(url,{
             mode: 'no-cors',
             method: 'POST'
             });

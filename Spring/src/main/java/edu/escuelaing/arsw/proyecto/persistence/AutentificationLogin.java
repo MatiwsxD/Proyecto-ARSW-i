@@ -39,7 +39,6 @@ public class AutentificationLogin extends ConexionSQL{
             Connection conexion = conectar();
             st = conexion.createStatement();
             String sql = "insert into registro(usernames,correo,password,pganadas,pperdidas) values('" + user.getName() + "','" + user.getCorreo() + "','" + user.getPassword() + "','" +user.getpGanadas()  + "','" + user.getpPerdidas()+"');";
-            System.out.println(sql);
             st.execute(sql);
             st.close();
             conexion.close();
@@ -49,17 +48,22 @@ public class AutentificationLogin extends ConexionSQL{
     }
 
 
-    public User getUser(String user) {
+    public User getUser(String correo) {
         User userInfo = new User();
         try{
             Connection conexion = conectar();
             st = conexion.createStatement();
-            String sql = "select * from register where user='" + user + "';";
+            String sql = "select * from registro where correo='" + correo + "';";
             rs = st.executeQuery(sql);
-            rs.next();
-            userInfo.setName(rs.getString("Usuario"));
-            userInfo.setpGanadas(rs.getInt("pGanadas"));
-            userInfo.setpPerdidas(rs.getInt("pPerdidas"));
+            if(rs.next()){
+                userInfo.setName(rs.getString("usernames"));
+                userInfo.setpGanadas(Integer.valueOf(rs.getString("pganadas")));
+                userInfo.setpPerdidas(Integer.valueOf(rs.getString("pperdidas")));
+            }
+            else{
+                userInfo.setName("No value");
+            }
+
             return userInfo;
         }
         catch (Exception e) {
@@ -71,11 +75,11 @@ public class AutentificationLogin extends ConexionSQL{
 
     }
 
-    public boolean isRegister(String usernames) {
+    public boolean isRegister(String correo) {
         try{
             Connection conexion = conectar();
             st = conexion.createStatement();
-            String sql = "select * from registro where usernames='" + usernames + "';";
+            String sql = "select * from registro where correo='" + correo + "';";
             rs = st.executeQuery(sql);
             if (rs.next()) {
                 return true;
@@ -92,6 +96,53 @@ public class AutentificationLogin extends ConexionSQL{
 
 
     }
+    public void actualizarWinner(String correo) {
+        User userInfo = new User();
+        try {
+            Connection conexion = conectar();
+            st = conexion.createStatement();
+            String sql = "select * from registro where correo='" + correo + "';";
+            rs = st.executeQuery(sql);
+            if(rs.next()){
+                userInfo.setName(rs.getString("usernames"));
+                userInfo.setCorreo(rs.getString("correo"));
+                userInfo.setPassword(rs.getString("password"));
+                userInfo.setpGanadas(1+Integer.valueOf(rs.getString("pganadas")));
+                userInfo.setpPerdidas(Integer.valueOf(rs.getString("pperdidas")));
+                String sql2="delete from registro where correo='"+correo+"'; ";
+                st.executeUpdate(sql2);
+                insertar(userInfo);
+
+            }
+        }
+        catch (Exception e){
+            Logger.getLogger(AutentificationLogin.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    public void actualizarLoser(String correo) {
+        User userInfo = new User();
+        try {
+            Connection conexion = conectar();
+            st = conexion.createStatement();
+            String sql = "select * from registro where correo='" + correo + "';";
+            rs = st.executeQuery(sql);
+            if(rs.next()){
+                userInfo.setName(rs.getString("usernames"));
+                userInfo.setCorreo(rs.getString("correo"));
+                userInfo.setPassword(rs.getString("password"));
+                userInfo.setpGanadas(Integer.valueOf(rs.getString("pganadas")));
+                userInfo.setpPerdidas(1+Integer.valueOf(rs.getString("pperdidas")));
+                String sql2="delete from registro where correo='"+correo+"'; ";
+                st.executeUpdate(sql2);
+                insertar(userInfo);
+
+            }
+        }
+        catch (Exception e){
+            Logger.getLogger(AutentificationLogin.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
 
 
 

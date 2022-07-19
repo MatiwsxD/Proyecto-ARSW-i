@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import logo from './logo.png'
-import Login1 from './Login1.css'
+//import Login1 from './Login1.css'
 import { useNavigate } from 'react-router-dom';
 
 export let Login = function(){
@@ -18,10 +18,12 @@ export let Login = function(){
     let data = await fetch(url,{
       method: 'GET'
     }).then(response => response.json());
-    console.log(data);
     if(data){
       navigate('/room')
-      localStorage.setItem("Correo",email);
+      sessionStorage.setItem("Correo",email);
+    }
+    else{
+      alert("Contraseña o correo incorrectos")
     }
   }
     

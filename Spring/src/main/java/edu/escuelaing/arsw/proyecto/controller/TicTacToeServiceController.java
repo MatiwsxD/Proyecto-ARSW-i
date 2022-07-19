@@ -26,24 +26,19 @@ public class TicTacToeServiceController {
     @GetMapping("/login/{correo}/{password}")
     public ResponseEntity<?> loginPlayer(@PathVariable(value = "correo") String correo, @PathVariable(value = "password")String contraseña){
 
-       return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+       return new ResponseEntity<>(serviciosLogin.loginPlayer(correo,contraseña), HttpStatus.ACCEPTED);
 
     }
 
-    @GetMapping("/getUser")
-    public ResponseEntity<?> getUser(@RequestParam(value = "user") String user){
-        return new ResponseEntity<>(serviciosLogin.getUser(user), HttpStatus.ACCEPTED);
+    @GetMapping("/getUser/{correo}")
+    public ResponseEntity<?> getUser(@PathVariable(value = "correo") String correo){
+        return new ResponseEntity<>(serviciosSala.getPerfil(correo), HttpStatus.ACCEPTED);
 
     }
 
-    @PutMapping("/addRecompenza")
-    public ResponseEntity<?> addRecompensa(@RequestParam(value = "user") String user, @RequestParam(value = "rescompensa") String recompensa){
-        serviciosLogin.regRecompenza(user, recompensa);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
-    @GetMapping("/checkUser/{usuario}")
-    public ResponseEntity<?> loginPlayer(@PathVariable(value = "usuario") String usuario){
-        return new ResponseEntity<>(serviciosLogin.estaRegistrado(usuario), HttpStatus.ACCEPTED);
+    @GetMapping("/checkUser/{correo}")
+    public ResponseEntity<?> loginPlayer(@PathVariable(value = "correo") String correo){
+        return new ResponseEntity<>(serviciosLogin.estaRegistrado(correo), HttpStatus.ACCEPTED);
 
     }
     @GetMapping("/players/{sala}")
@@ -59,6 +54,16 @@ public class TicTacToeServiceController {
     @PostMapping("/resetRoom/{sala}")
     public ResponseEntity<?> resetRoom(@PathVariable("sala") String sala){
         serviciosSala.resetSala(sala);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+   @PostMapping("Winner/{correo}")
+    public ResponseEntity<?> addWinner(@PathVariable("correo") String correo){
+        serviciosSala.addWinn(correo);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+   }
+    @PostMapping("Loser/{correo}")
+    public ResponseEntity<?> addLoser(@PathVariable("correo") String correo){
+        serviciosSala.addLoser(correo);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

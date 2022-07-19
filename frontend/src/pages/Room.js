@@ -13,7 +13,7 @@ export let Room = function(){
           }).then(response => response.json());
           //console.log(data);
           if(data){
-            localStorage.setItem("Sala",x);
+            sessionStorage.setItem("Sala",x);
             navigate("/game")
           }
           else{

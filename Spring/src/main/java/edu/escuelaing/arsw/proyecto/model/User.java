@@ -8,7 +8,6 @@ public class User {
     private String password;
     private Integer pGanadas = 0;
     private Integer pPerdidas = 0;
-    private ArrayList<String> mejoras = new ArrayList<String>();
     public User (){
 
     }
@@ -21,8 +20,6 @@ public class User {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-
 
     public String getName() {
         return name;
@@ -56,11 +53,4 @@ public class User {
         this.pPerdidas = pPerdidas;
     }
 
-    public ArrayList<String> getMejoras() {
-        return mejoras;
-    }
-
-    public void setMejoras(ArrayList<String> mejoras) {
-        this.mejoras = mejoras;
-    }
 }
